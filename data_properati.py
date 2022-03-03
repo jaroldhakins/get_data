@@ -13,7 +13,7 @@ if __name__ == "__main__":
         para cambiar de pagina agregar la pagina al final de la url
     """
 
-    url = "https://www.properati.com.co/_next/data/PLZGi_t9oPLT59HJnhDxo/s/{}.json?search_params={}&page=2"\
+    url = "https://www.properati.com.co/_next/data/PLZGi_t9oPLT59HJnhDxo/s/{}.json?search_params={}"\
         .format(argv[1], argv[1])
     todo = requests.get(url, verify=False).json()
     with open(f'{argv[2]}.csv', 'w', newline='') as csvfile:
