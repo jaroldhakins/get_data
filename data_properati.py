@@ -8,7 +8,7 @@ import sys
 
 
 if __name__ == "__main__":
-    """ agregar lugar, nombre que se le quiera poner al archivo
+    """ agregar lugar mas el nombre que se le quiera poner al archivo
         ej: python3 data_properati.py bello-antioquia bello
         para cambiar de pagina agregar la pagina al final de la url
     """
