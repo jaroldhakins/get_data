@@ -4,12 +4,19 @@
 import requests
 import csv
 from sys import argv
+import sys
 
 
 if __name__ == "__main__":
-    url = "https://www.properati.com.co/_next/data/PLZGi_t9oPLT59HJnhDxo/s/rionegro-antioquia.json?search_params=rionegro-antioquia"
+    """ agregar lugar mas el nombre que se le quiera poner al archivo
+        ej: python3 data_properati.py bello-antioquia bello
+        para cambiar de pagina agregar la pagina al final de la url
+    """
+
+    url = "https://www.properati.com.co/_next/data/PLZGi_t9oPLT59HJnhDxo/s/{}.json?search_params={}&page=2"\
+        .format(argv[1], argv[1])
     todo = requests.get(url, verify=False).json()
-    with open(f'{argv[1]}.csv', 'w', newline='') as csvfile:
+    with open(f'{argv[2]}.csv', 'w', newline='') as csvfile:
         taskwriter = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         for i, j in todo.items():
             if i == "pageProps":
@@ -23,7 +30,8 @@ if __name__ == "__main__":
                                         name_city = p[0]['name']
                                         lon = p[0]['lon']
                                         lat = p[0]['lat']
-                                        taskwriter.writerow([id_city, name_city, lon, lat])
+                                        taskwriter.writerow(
+                                            [id_city, name_city, lon, lat])
                                     except:
                                         break
                         if n == "results":
@@ -50,6 +58,9 @@ if __name__ == "__main__":
                                         else:
                                             address = y[b]['title']
                                         b += 1
-                                        taskwriter.writerow([id_lote, stratum, price, mt2, address])
+                                        taskwriter.writerow(
+                                            [id_lote, stratum, price, mt2, address])
             else:
                 pass
+
+print("arguments", len(sys.argv))
